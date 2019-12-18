@@ -36,6 +36,11 @@ class MainVC: UIViewController {
         
 //        mainKeyWidthConstraint.constant = self.view.frame.width-50
         self.view.sendSubviewToBack(mainStackView)
+        
+        // swipe gesture recognizer setup
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
+        swipeRight.direction = .right
+        self.view.addGestureRecognizer(swipeRight)
     }
     
     override var prefersHomeIndicatorAutoHidden: Bool {
@@ -116,6 +121,14 @@ class MainVC: UIViewController {
             print(error.localizedDescription)
         }
 
+    }
+    
+    // swipe gesture recognizer handler
+    @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
+        if gesture.direction == .right {
+            print("Swipe Right")
+            performSegue(withIdentifier: "ToComplexSegue", sender: self)
+        }
     }
 }
 
